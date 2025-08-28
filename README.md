@@ -6,7 +6,7 @@ Antes de qualquer configuração, é importante verificar como está a organiza�
 
 -lsblk
 
-![linux](imagens/a_lsblk.png)
+![lsblk](imagem/a_lsblk.png)
 
 
 ➡️ Conforme a imagem, o sda possui três partições:
