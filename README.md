@@ -112,17 +112,22 @@ Na barra de endereços do Windows Explorer, digitar:
 
 \\192.168.100.83\samba
 
-
 Será solicitado usuário e senha:
 
 Usuário: ewerton
 
 Senha: (definida no smbpasswd)
-(foto)
+
+![CREDENCIAIS](Imagem/i_credenciais_samba.png)
 
 Após autenticação, a pasta aparecerá como rede no Windows.
 É possível também mapear o compartilhamento como um disco de rede.
-(foto)
+
+![CAMINHO](Imagem/k_caminhowin.png)
+
+Mapeamento:
+
+![CAMINHO](Imagem/j_mapeamento.png)
 
 10. Verificação no Ubuntu
 
@@ -130,10 +135,9 @@ Após salvar arquivos pelo Windows, eles estarão disponíveis em:
 
 ls -l /samba
 
+![CAMINHOSAMBA](Imagem/l_caminholin.png)
 
-(fotos)
-
-🔎 Observação importante
+Observação importante
 
 O diretório lost+found aparece porque /samba é o ponto de montagem de um volume ext4.
 
@@ -149,7 +153,7 @@ E no smb.conf, alterar para:
 
 path = /samba/compartilhado
 
-❗ Dificuldades encontradas
+Dificuldades encontradas:
 
 Erros de escrita no comando de montagem.
 
@@ -159,6 +163,6 @@ Permissões rigorosas no Linux, que bloquearam escrita até serem ajustadas.
 
 Diferenças de comportamento no Windows (descoberta de rede, credenciais salvas automaticamente).
 
-➡️ Essas dificuldades reforçam a importância da prática, pois a integração entre Linux e Windows exige atenção aos detalhes para garantir uma boa experiência de uso.
+Essas dificuldades reforçam a importância da prática, pois a integração entre Linux e Windows exige atenção aos detalhes para garantir uma boa experiência de uso.
 
 
