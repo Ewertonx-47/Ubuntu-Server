@@ -25,8 +25,7 @@ Para verificar quanto espaço livre existe no VG (Volume Group):
 
 sudo vgdisplay
 
-
-(foto)
+![VG](Imagem/b_sudovgdisplay.png)
 
 ➡️ Nesse exemplo, existem 8.22 GB livres para criação de novos volumes lógicos.
 
