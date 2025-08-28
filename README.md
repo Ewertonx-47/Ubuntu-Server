@@ -44,8 +44,7 @@ ubuntu-vg → nome do Volume Group.
 4. Formatação do volume
 sudo mkfs.ext4 /dev/ubuntu-vg/samba
 
-
-(foto)
+![FSAMBA](Imagem/d_formatando_samba.png)
 
 ➡️ Volume formatado em ext4 para uso.
 
