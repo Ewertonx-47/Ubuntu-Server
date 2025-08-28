@@ -4,10 +4,9 @@ CRIANDO VOLUME NO SISTEMA LVM E UTILIZANDO O SAMBA PARA COMPARTILHAR DADOS COM W
 
 Antes de qualquer configuração, é importante verificar como está a organização dos discos e partições no Ubuntu.
 
-lsblk
+-lsblk
 
-
-(foto)
+![lsblk](imagens/a_lsblk.png)
 
 ➡️ Conforme a imagem, o sda possui três partições:
 
