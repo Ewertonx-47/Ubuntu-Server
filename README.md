@@ -46,25 +46,24 @@ sudo mkfs.ext4 /dev/ubuntu-vg/samba
 
 ![FSAMBA](Imagem/d_formatando_samba.png)
 
-➡️ Volume formatado em ext4 para uso.
+-> Volume formatado em ext4 para uso.
 
 5. Criação e montagem do ponto de montagem
 
 Criação do diretório:
 
-sudo mkdir /samba
+-sudo mkdir /samba
 
+![MKDIRSAMBA](Imagem/e_mkdir_samba.png)
 
-(foto)
 
 Montagem do volume:
 
-sudo mount /dev/ubuntu-vg/samba /samba
+-sudo mount /dev/ubuntu-vg/samba /samba
 
+![MOUNTSAMBA](Imagem/f_mount_samba.png)
 
-(foto)
-
-⚠️ Erros podem ocorrer se o argumento final for escrito incorretamente (exemplo: /samba vs samba).
+⚠️ Erros podem ocorrer se o argumento final for escrito incorretamente (exemplo: /samba vs samba). Foi o que aconteceu na hora de de montar o volume lógico, pois o usuario já estava no diretório que possui o diretório "samba". Nessa situação, não é necessário colocar o / que serve como caminho, caso esteja fora do diretório em questão. 
 
 6. Configuração de montagem persistente
 
