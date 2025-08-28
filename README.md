@@ -69,15 +69,13 @@ Montagem do volume:
 
 Sem configuração persistente, após reinicializações o diretório /samba ficará vazio. Para corrigir:
 
-sudo nano /etc/fstab
-
+-sudo nano /etc/fstab
 
 Adicionar a seguinte linha:
 
 /dev/ubuntu-vg/samba   /samba   ext4   defaults   0   2
 
-
-(foto)
+![NANOFSTAB](Imagem/g_nano_fstab.png)
 
 7. Instalação e configuração do Samba
 
@@ -86,11 +84,9 @@ Atualizar repositório e instalar o pacote:
 sudo apt update
 sudo apt install samba -y
 
-
 Editar o arquivo de configuração:
 
 sudo nano /etc/samba/smb.conf
-
 
 Adicionar o bloco:
 
@@ -101,9 +97,8 @@ Adicionar o bloco:
    guest ok = yes
    force user = ewerton
 
-
-(foto)
-
+   ![NANOSAMBA](Imagem/h_nano_samba.png)
+   
 8. Permissões do diretório compartilhado
 
 Dar as permissões corretas para o usuário:
