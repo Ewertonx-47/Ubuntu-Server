@@ -9,13 +9,13 @@ Antes de qualquer configuração, é importante verificar como está a organiza�
 ![lsblk](Imagem/a_lsblk.png)
 
 
-➡️ Conforme a imagem, o sda possui três partições:
+-> Conforme a imagem, o sda possui três partições:
 
-sda1 → partição de reserva do sistema.
+sda1 - partição de reserva do sistema.
 
-sda2 (1.8G) → montada em /boot, contendo os arquivos essenciais para inicialização do SO.
+sda2 (1.8G) - montada em /boot, contendo os arquivos essenciais para inicialização do SO.
 
-sda3 → montada no diretório raiz /, já configurada como LVM.
+sda3 - montada no diretório raiz /, já configurada como LVM.
 
 Dentro do LVM, pode-se observar que 10GB estão alocados para ubuntu--vg-ubuntu--lv, responsável pelo diretório raiz.
 
@@ -23,21 +23,23 @@ Dentro do LVM, pode-se observar que 10GB estão alocados para ubuntu--vg-ubuntu-
 
 Para verificar quanto espaço livre existe no VG (Volume Group):
 
-sudo vgdisplay
+-sudo vgdisplay
 
 ![VG](Imagem/b_sudovgdisplay.png)
 
-➡️ Nesse exemplo, existem 8.22 GB livres para criação de novos volumes lógicos.
+-> Nesse exemplo, existem 8.22 GB livres para criação de novos volumes lógicos.
 
-3. Criação do volume lógico para Samba
-sudo lvcreate -L 8G -n samba ubuntu-vg
+3. Criação do volume lógico para Samba.
 
+-sudo lvcreate -L 8G -n samba ubuntu-vg
 
 -L 8G → define o tamanho do volume.
 
 -n samba → nome do volume lógico.
 
 ubuntu-vg → nome do Volume Group.
+
+![LG](Imagem/c_volume_samba.png)
 
 4. Formatação do volume
 sudo mkfs.ext4 /dev/ubuntu-vg/samba
