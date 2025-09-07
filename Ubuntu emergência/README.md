@@ -5,3 +5,4 @@ Porém, na hora de utilizar o Samba, que é o software utilizado para fazer a co
 O primeiro problema identificado foi que o Ubuntu não estava na mesma rede que o host. A interface 1 (lo) é a de loopback, a interface 2 (enp0s3) é a que faz a comunicação interna com o pfsense e a interface 3 (enps0s8) estava vazia. Após usar o comando sudo dhclient, a interface 3 passou a receber IP. 
 
 ![ENP0S8](Imagem/j_enp0s8.png)
+![lsblk](Imagem/a_lsblk.png)
