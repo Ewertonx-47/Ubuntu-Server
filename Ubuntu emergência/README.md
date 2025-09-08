@@ -104,7 +104,7 @@ fsck from util-linux 2.37.2
 
 Normalmente essa ferramenta faz algumas perguntas [y|n], porém o comando simplesmente retornou para a linha de comando sem nenhuma mensagem adicional, isso pode indicar que o sistema de arquivos já estava limpo e não havia erros a serem corrigidos.
 
-
+![FSCK](../Imagem/fsck.png)
 
 
 
