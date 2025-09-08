@@ -24,4 +24,4 @@ Com isso, foi feita uma verificação no serviço Samba para ver se ele estava f
 
 Esse comando me mostrou que o serviço não estava rondando 
 
-![START](../Imagem/k_startsmbd.png)
+![LOG](../Imagem/logsmbd.png)
