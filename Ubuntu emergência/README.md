@@ -82,6 +82,13 @@ Até aqui, foi diagnosticado as seguintes situações:
 -Mas quando você roda systemctl start smbd, ele não sobe e também não gera log.
 -Systemd se encontra em estado crítico e com isso, inicializou em modo root e não permite alterações do sistema.
 
+Após algumas pesquisas foi entendido que o sistema possivelmente está corrompido, e por isso aconteceu todos esses comportamentos. O sistema só voltará ao normal depois que for identificado o que está causando o problema. Então nessas situações, o objetivo dele é manter o sistema seguro sem que o usuário cause mais danos, Entretanto, o sistema monta a partição raiz (/) em modo somente leitura (read-only), por isso não estava sendo possível fazer alterações no sistema.
+
+Como foi de entendimento que pode ser algo que está corrompendo o sistema, e por isso esse comportamento. Foi analisando o log de inicialização do sistema para ver se ocorreu algum erro que possa dar uma pista do que aconteceu.
+
+-journalctl -xb
+
+![LOG](../Imagem/journalctl-xb.png)
 
 
 
