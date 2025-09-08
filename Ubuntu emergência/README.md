@@ -24,4 +24,14 @@ Com isso, foi feita uma verificação no serviço Samba para ver se ele estava f
 
 Esse comando me mostrou que o serviço não estava rondando 
 
+![START](../Imagem/k_startsmbd.png)
+
+Conforme a imagem acima, ao tentar executar o “systemctl start smbd” após verificar que o sistema não estava rodando. O sistema emitiu a seguinte mensagem: 
+
+“Failed to start smbd.service: Transaction for smbd.service/start is destructive (emergency.target has 'start' job queued, but 'stop' is included in transaction).”
+
+Nesse caso, ele quis dizer que o systemd do sistema operacional está em modo crítico. E isso já esclarece o porque o sistema inicializou como root e o serviço não está rodando. Foi executado um “systemctl status apache2” para verificar um outro serviço e também não estava rodando. 
+
+Também foi feita uma analise os logs do serviço para identificar se existia algum comportamento suspeito. 
+
 ![LOG](../Imagem/logsmbd.png)
