@@ -106,6 +106,18 @@ Normalmente essa ferramenta faz algumas perguntas [y|n], porém o comando simple
 
 ![FSCK](../Imagem/fsck.png)
 
+O problema mais provável é a partição sda3 e a entrada incorreta no arquivo /etc/fstab.O que é preciso fazer agora é o que já foi discutido:
+
+-Remontar o sistema de arquivos raiz em modo de escrita com o comando mount -o remount,rw /.
+-Abrir o arquivo /etc/fstab com nano /etc/fstab.
+-Comente a linha referente à partição sda3 adicionando um # no início da linha.
+-Salve e feche o arquivo.
+-Reinicie o sistema com o comando reboot.
+
+Após esse passo a passo, o sistema inicializou em modo usuário comum e todos os serviços estavam running, ou seja, problema resolvido.
+
+Todo esse diagnóstico reforça a importância de analisar com atenção todos os pontos para que seja possível solucionar os problemas. De início não existiu um olhar analitico para identificar de imediato o problema, mas com pesquisas e estudos foi possível solucionar o problema  e reforçar o conhecimento em sistema operacional Linux  
+
 
 
 
