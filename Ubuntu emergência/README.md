@@ -82,13 +82,30 @@ Até aqui, foi diagnosticado as seguintes situações:
 -Mas quando você roda systemctl start smbd, ele não sobe e também não gera log.
 -Systemd se encontra em estado crítico e com isso, inicializou em modo root e não permite alterações do sistema.
 
-Após algumas pesquisas foi entendido que o sistema possivelmente está corrompido, e por isso aconteceu todos esses comportamentos. O sistema só voltará ao normal depois que for identificado o que está causando o problema. Então nessas situações, o objetivo dele é manter o sistema seguro sem que o usuário cause mais danos, Entretanto, o sistema monta a partição raiz (/) em modo somente leitura (read-only), por isso não estava sendo possível fazer alterações no sistema.
+Após algumas pesquisas foi entendido que o sistema possivelmente está com um problema crítico, como informado na saída dos comandos, e por isso aconteceu todos esses comportamentos. O sistema só voltará ao normal depois que for identificado o que está causando o problema. Então nessas situações, o objetivo dele é manter o sistema seguro sem que o usuário cause mais danos, Entretanto, o sistema monta a partição raiz (/) em modo somente leitura (read-only), por isso não estava sendo possível fazer alterações no sistema.
 
 Como foi de entendimento que pode ser algo que está corrompendo o sistema, e por isso esse comportamento. Foi analisando o log de inicialização do sistema para ver se ocorreu algum erro que possa dar uma pista do que aconteceu.
 
 -journalctl -xb
 
 ![LOG](../Imagem/journalctl-xb.png)
+
+Como não houve nenhum problema de inicialização do sistema operacional, e a situação atual se trata de um possível disco corrompido. Foi analisado como estava os discos e partições utilizando um comando.
+
+-lsblk 
+
+Com esse comando foi possível observar que na partição sda3 que tem o volume lógico (ubuntu-lv) do grupo de volume (ubuntu-vg) não está montado em nenhum diretório. Porém na documentação anterior, o correto seria está montado no diretório “samba” dentro do diretório “ewerton”. E sempre que é feita uma montagem, é necessário alterar o arquivo de configuração de montagem do sistema para que ele sempre inicialize montado no diretório escolhido, porém não foi o que aconteceu ao rodar o sistema operacional, e por não está montando como deveria, isso é um forte indício de que é essa situação que deixou o sistema operacional em estado crítico. Foi usado um comando, uma ferramenta interativa que verifica e tenta reparar erros no sistema de arquivos. 
+
+-fsck /dev/sda3
+
+O output desse comando foi:
+
+fsck from util-linux 2.37.2
+
+Normalmente essa ferramenta faz algumas perguntas [y|n], porém o comando simplesmente retornou para a linha de comando sem nenhuma mensagem adicional, isso pode indicar que o sistema de arquivos já estava limpo e não havia erros a serem corrigidos.
+
+
+
 
 
 
