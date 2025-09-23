@@ -118,7 +118,7 @@ Usuário: ewerton
 
 Senha: (definida no smbpasswd)
 
-![CREDENCIAIS](Imagem/i-credenciais .png)
+![CREDENCIAIS](Imagem/i-credenciais.png)
 
 Após autenticação, a pasta aparecerá como rede no Windows.
 É possível também mapear o compartilhamento como um disco de rede.
