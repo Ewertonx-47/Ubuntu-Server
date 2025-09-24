@@ -25,7 +25,7 @@ Para verificar quanto espaço livre existe no VG (Volume Group):
 
 -sudo vgdisplay
 
-![VG](Imagem/b_sudovgdisplay.png)
+![VG](../Imagem/b_sudovgdisplay.png)
 
 -> Nesse exemplo, existem 8.22 GB livres para criação de novos volumes lógicos.
 
@@ -39,12 +39,12 @@ Para verificar quanto espaço livre existe no VG (Volume Group):
 
 ubuntu-vg → nome do Volume Group.
 
-![LG](Imagem/c_volume_samba.png)
+![LG](../Imagem/c_volume_samba.png)
 
 4. Formatação do volume
 sudo mkfs.ext4 /dev/ubuntu-vg/samba
 
-![FSAMBA](Imagem/d_formatando_samba.png)
+![FSAMBA](../Imagem/d_formatando_samba.png)
 
 -> Volume formatado em ext4 para uso.
 
@@ -54,14 +54,14 @@ Criação do diretório:
 
 -sudo mkdir /samba
 
-![MKDIRSAMBA](Imagem/e_mkdir_samba.png)
+![MKDIRSAMBA](../Imagem/e_mkdir_samba.png)
 
 
 Montagem do volume:
 
 -sudo mount /dev/ubuntu-vg/samba /samba
 
-![MOUNTSAMBA](Imagem/f_mount_samba.png)
+![MOUNTSAMBA](../Imagem/f_mount_samba.png)
 
 ⚠️ Erros podem ocorrer se o argumento final for escrito incorretamente (exemplo: /samba vs samba). Foi o que aconteceu na hora de de montar o volume lógico, pois o usuario já estava no diretório que possui o diretório "samba". Nessa situação, não é necessário colocar o / que serve como caminho, caso esteja fora do diretório em questão. 
 
@@ -75,7 +75,7 @@ Adicionar a seguinte linha:
 
 /dev/ubuntu-vg/samba   /samba   ext4   defaults   0   2
 
-![NANOFSTAB](Imagem/g_nano_fstab.png)
+![NANOFSTAB](../Imagem/g_nano_fstab.png)
 
 7. Instalação e configuração do Samba
 
@@ -97,7 +97,7 @@ Adicionar o bloco:
    guest ok = yes
    force user = ewerton
 
-   ![NANOSAMBA](Imagem/h_nano_samba.png)
+   ![NANOSAMBA](../Imagem/h_nano_samba.png)
    
 8. Permissões do diretório compartilhado
 
@@ -118,16 +118,16 @@ Usuário: ewerton
 
 Senha: (definida no smbpasswd)
 
-![CREDENCIAIS](Imagem/i-credenciais.png)
+![CREDENCIAIS](../Imagem/i-credenciais.png)
 
 Após autenticação, a pasta aparecerá como rede no Windows.
 É possível também mapear o compartilhamento como um disco de rede.
 
-![CAMINHO](Imagem/k_caminhowin.png)
+![CAMINHO](../Imagem/k_caminhowin.png)
 
 Mapeamento:
 
-![CAMINHO](Imagem/j_mapeamento.png)
+![CAMINHO](../Imagem/j_mapeamento.png)
 
 10. Verificação no Ubuntu
 
@@ -135,7 +135,7 @@ Após salvar arquivos pelo Windows, eles estarão disponíveis em:
 
 ls -l /samba
 
-![CAMINHOSAMBA](Imagem/l_caminholin.png)
+![CAMINHOSAMBA](../Imagem/l_caminholin.png)
 
 Observação importante
 
