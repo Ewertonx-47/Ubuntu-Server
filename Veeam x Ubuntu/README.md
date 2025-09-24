@@ -21,6 +21,7 @@ Depois de criar o mapeamento, se faz necessário instalar um pacote de software 
 Entendendo todo o funcionamento das questões acima, é preciso montar o drive **cdrom** em uma pasta vazia para seja possível enxergar o conteúdo que ali se encontra e poder executar os comandos necessários para instalar o Guest Addition. 
 
 -sudo mkdir -p /mnt/virtualbox #Criando uma pasta vazia dentro do diretório /mnt
+
 -sudo mount /dev/cdrom /mnt/virtualbox #Montando o drive cdrom em virtualbox 
 
 Uma observação sobre o /mnt, é que ele, por questões de padronização das distros, as montagens manuais e temporárias são feitas em cima dele.
@@ -31,14 +32,16 @@ sudo apt-get update && sudo apt-get install build-essential dkms
 
 Agora, depois de fazer a montagem e instalar os arquivos que irão auxiliar no funcionamento do pacote, é necessário entrar no arquivo onde o drive está montado e executar o instalador do Guest Addition.
 
-cd /mnt/virtualbox
-sudo ./VBoxLinuxAdditions.run
+-cd /mnt/virtualbox
+
+-sudo ./VBoxLinuxAdditions.run
 
 (Foto)
 
 Na imagem, pode se observar que houve um erro na executação do instalador, pois ainda está em falta de alguns pacotes necessários para o funcionamento do Guest Addition. Nesse caso, será instalado mais pacotes necessários.
 
 -sudo apt-get update
+
 -sudo apt-get install gcc make perl
 
 Navegue até o ponto de montagem novamente e execute o instalador com **sudo ./VBoxLinuxAdditions.run**.
@@ -56,6 +59,7 @@ Como foi informado anteriormente, o diretório /mnt é usado para montagens manu
 Pode ser observado na imagem acima que ocorreu um erro de permissão.Isso ocorreu, pois para acessar pastas compartilhadas do virtualbox, é ncessário incluir o usuário (ewerton) em um grupo especifico do virtualbox, que é o vboxsf e depois reiniciar o sistema.
 
 -sudo usermod -aG vboxsf ewerton
+
 -reboot
 
 **sudo:** Executa o comando como superusuário (administrador).
@@ -66,8 +70,9 @@ Pode ser observado na imagem acima que ocorreu um erro de permissão.Isso ocorre
 
 Agora sim, o acesso a pasta compatilhada é permitido e pode ser feita a instalação do zabbix agent. 
 
-cd /media/nome_da_pasta_compartilhada #Visualizar o conteúdo 
-sudo dpkg -i veeam-release-deb_1.0.9_amd64.deb #Desempacotar o arquivo. 
+-cd /media/nome_da_pasta_compartilhada #Visualizar o conteúdo 
+
+-sudo dpkg -i veeam-release-deb_1.0.9_amd64.deb #Desempacotar o arquivo. 
 
 (foto)
 
