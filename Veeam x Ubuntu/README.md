@@ -5,7 +5,9 @@ O Veeam é uma ferramenta poderosa para backup, mas para ele "enxergar" o Ubuntu
 *PROCESSO BÁSICO DE COMUNICAÇÃO*
 
 **Baixar o Agente:** Acesse o site da Veeam e baixe o instalador do Veeam Agent for Linux. Provavelmente vai precisar do arquivo .deb para o Ubuntu.
+
 **Transferir o Arquivo:** Passar o arquivo .deb para a máquina virtual Ubuntu. Pode usar uma pasta compartilhada no VirtualBox, um pen drive ou até mesmo o navegador da VM para fazer o download direto. Nesse caso, será usado a pasta compartilhada.
+
 **Instalar o Agente:** Dentro do seu Ubuntu, instalar o pacote usando o terminal.
 
 inicialmente, é necessário criar um pasta compartilhada entre o host e o Ubuntu. O caminho para isso é:
