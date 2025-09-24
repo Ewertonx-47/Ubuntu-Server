@@ -1,95 +1,79 @@
-**VINCULANDO SERVIÇO VEEAM AGENT COM UBUNTU NO VIRTUALBOX**
+VINCULANDO VEEAM AGENT COM UBUNTU NO VIRTUALBOX
 
-O Veeam é uma ferramenta poderosa para backup, mas para ele "enxergar" o Ubuntu dentro do VirtualBox, é preciso de um componente adicional, pois o Veeam que está no host (windows) não consegue acessar o disco da máquina virtual diretamente de forma gerenciada. A chave para a conexão é o Veeam Agent for Linux. É um software que deve ser instalado dentro do sistema operacional convidado (o Ubuntu). Ele funciona como um "tradutor" ou "agente" que se comunica com o servidor Veeam no host, permitindo que o Veeam realize e gerencie os backups.
+O Veeam é uma ferramenta poderosa para backup, mas para ele "enxergar" o Ubuntu dentro do VirtualBox, é preciso de um componente adicional. O Veeam que está no host (Windows) não consegue acessar o disco da máquina virtual diretamente de forma gerenciada. A chave para a comunicação é o Veeam Agent for Linux, um software que deve ser instalado dentro do sistema operacional convidado (o Ubuntu). Ele funciona como um "tradutor" que se comunica com o servidor Veeam no host, permitindo que o Veeam realize e gerencie os backups.
 
-*PROCESSO BÁSICO DE COMUNICAÇÃO*
+PROCESSO BÁSICO DE COMUNICAÇÃO
+1. Baixar o Agente: Acesse o site da Veeam e baixe o instalador do Veeam Agent for Linux. Para o Ubuntu, você precisará do arquivo .deb.
 
-**Baixar o Agente:** Acesse o site da Veeam e baixe o instalador do Veeam Agent for Linux. Provavelmente vai precisar do arquivo .deb para o Ubuntu.
+2. Transferir o Arquivo: Passe o arquivo .deb para a máquina virtual Ubuntu. Uma forma fácil e segura é usar uma pasta compartilhada do VirtualBox.
 
-**Transferir o Arquivo:** Passar o arquivo .deb para a máquina virtual Ubuntu. Pode usar uma pasta compartilhada no VirtualBox, um pen drive ou até mesmo o navegador da VM para fazer o download direto. Nesse caso, será usado a pasta compartilhada.
+3. Instalar o Agente: Dentro do seu Ubuntu, instale o pacote usando o terminal.
 
-**Instalar o Agente:** Dentro do seu Ubuntu, instalar o pacote usando o terminal.
+Instalando o Guest Additions (para Pastas Compartilhadas)
+Primeiro, é necessário criar uma pasta compartilhada entre o host e o Ubuntu. O caminho para isso é:
 
-inicialmente, é necessário criar um pasta compartilhada entre o host e o Ubuntu. O caminho para isso é:
+clicar na VM > Configurações > Pasta compartilhada
 
-clicar na VM->Configurações->Pasta compartilha
+Depois de mapear a pasta, é preciso instalar um pacote de software que faz a ponte entre a VM e o host, para que a VM consiga enxergar a pasta compartilhada. Esse pacote é o Guest Additions. A ISO do Guest Additions já é inserida no drive virtual de DVD/CD da VM no momento da instalação do sistema operacional. O Linux enxerga todos os dispositivos como arquivos, e o drive onde está o Guest Additions é o arquivo /dev/cdrom.
 
-Após criar mapeamento de qual pasta será compartilhada, de um nome para a pasta e salve.
+Para que a máquina virtual possa usar os arquivos do Guest Additions, é preciso montar o drive cdrom em uma pasta vazia.
 
-(foto)
+sudo mkdir -p /mnt/virtualbox (Cria uma pasta vazia dentro do diretório /mnt).
 
-Depois de criar o mapeamento, se faz necessário instalar um pacote de software que faz essa ponte entre a VM e o host, para que a VM consiga enxergar a pasta compartilhada. Esse pacote é o Guest Addition. Esse pacote é uma ISO que fica na pasta de instalação do host, e já é inserida na VM na hora da instalação do sistema operacional. Essa ISO fica no drive virtual de DVD/CD. O Linux enxerga todos os dispositivos como arquivos, e o drive onde está o Guest Addition é o arquivo **dev/cdrom**.
+sudo mount /dev/cdrom /mnt/virtualbox (Monta o drive cdrom na pasta virtualbox).
 
-Entendendo todo o funcionamento das questões acima, é preciso montar o drive **cdrom** em uma pasta vazia para seja possível enxergar o conteúdo que ali se encontra e poder executar os comandos necessários para instalar o Guest Addition. 
+O diretório /mnt é usado para montagens manuais e temporárias, uma prática padrão em distribuições Linux.
 
--sudo mkdir -p /mnt/virtualbox #Criando uma pasta vazia dentro do diretório /mnt
-
--sudo mount /dev/cdrom /mnt/virtualbox #Montando o drive cdrom em virtualbox 
-
-Uma observação sobre o /mnt, é que ele, por questões de padronização das distros, as montagens manuais e temporárias são feitas em cima dele.
-
-Depois de criar o arquivo e fazer a montagem, o pacote precisa de alguns outros pacotes de desenvolvimento que funcionarão junto com ele.
+Agora, é preciso instalar alguns pacotes de desenvolvimento que são necessários para que o Guest Additions funcione corretamente.
 
 sudo apt-get update && sudo apt-get install build-essential dkms
 
-Agora, depois de fazer a montagem e instalar os arquivos que irão auxiliar no funcionamento do pacote, é necessário entrar no arquivo onde o drive está montado e executar o instalador do Guest Addition.
+Em seguida, navegue até a pasta onde o drive está montado e execute o instalador do Guest Additions.
 
--cd /mnt/virtualbox
+cd /mnt/virtualbox
 
--sudo ./VBoxLinuxAdditions.run
+sudo ./VBoxLinuxAdditions.run
 
-(Foto)
+Se a instalação der um erro de falta de pacotes, instale os que estão faltando.
 
-Na imagem, pode se observar que houve um erro na executação do instalador, pois ainda está em falta de alguns pacotes necessários para o funcionamento do Guest Addition. Nesse caso, será instalado mais pacotes necessários.
+sudo apt-get install gcc make perl
 
--sudo apt-get update
+Navegue até o ponto de montagem novamente e execute o instalador com sudo ./VBoxLinuxAdditions.run.
 
--sudo apt-get install gcc make perl
+Conforme a imagem, a execução do instalador funcionou. Agora, é essencial reiniciar a máquina para que o pacote funcione corretamente.
 
-Navegue até o ponto de montagem novamente e execute o instalador com **sudo ./VBoxLinuxAdditions.run**.
+Configurando Permissões para a Pasta Compartilhada
+Depois de reiniciar, o VirtualBox monta a pasta compartilhada no diretório /media. No entanto, para acessar o conteúdo, é necessário incluir o seu usuário (ewerton) em um grupo específico chamado vboxsf.
 
-(Foto)
+sudo usermod -aG vboxsf ewerton
 
-Conforma a imagem acima, execução do instalador funcionou normalmente. Agora, reiniciar a máquina é essencial para o bom funcionamento do pacote instalado. 
+sudo: Executa o comando como superusuário (administrador).
 
-Como foi informado anteriormente, o diretório /mnt é usado para montagens manuais e temporárias. O virtualbox considera a pasta compartilada como dispositivo removível e dispositivos removiveis ficam montados no diretório /media. De forma e utilizando o Guest Addition instalado, o sistema operacional montou o pasta compartilhada em /media. Agora, é só visualizar o conteúdo desse diretório.
+usermod: É o comando para modificar um usuário.
 
--cd /media/sf_Downloads #Navegar até o pasta compartilhada
+-aG: Adiciona (-a) o usuário a um grupo suplementar (-G).
 
-(Foto)
+vboxsf: É o nome do grupo que controla as pastas compartilhadas.
 
-Pode ser observado na imagem acima que ocorreu um erro de permissão.Isso ocorreu, pois para acessar pastas compartilhadas do virtualbox, é ncessário incluir o usuário (ewerton) em um grupo especifico do virtualbox, que é o vboxsf e depois reiniciar o sistema.
+ewerton: O nome do seu usuário.
 
--sudo usermod -aG vboxsf ewerton
+Reinicie a máquina novamente para que a mudança de grupo tenha efeito.
 
--reboot
+reboot
 
-**sudo:** Executa o comando como superusuário (administrador).
-**usermod:** É o comando para modificar um usuário.
-**-aG:** Adiciona (-a) o usuário a um grupo suplementar (-G).
-**vboxsf:** É o nome do grupo que controla as pastas compartilhadas.
-**ewerton:** O nome do seu usuário.
+Agora sim, o acesso à pasta compartilhada é permitido.
 
-Agora sim, o acesso a pasta compatilhada é permitido e pode ser feita a instalação do zabbix agent. 
+Instalando o Veeam Agent for Linux
+A partir da pasta compartilhada, use o dpkg para instalar o arquivo do repositório da Veeam.
 
--cd /media/nome_da_pasta_compartilhada #Visualizar o conteúdo 
+cd /media/sf_Downloads
 
--sudo dpkg -i veeam-release-deb_1.0.9_amd64.deb #Desempacotar o arquivo. 
+sudo dpkg -i veeam-release-deb_1.0.9_amd64.deb
 
-(foto)
+É crucial entender que o arquivo veeam-release-deb_1.0.9_amd64.deb não é o Veeam Agent completo. Ele é um pacote de configuração que informa ao seu sistema onde encontrar o Veeam Agent. A função do dpkg -i aqui é apenas instalar esse arquivo de configuração localmente.
 
-Após todas as configurações, é preciso baixar o Veeam, pois o arquivo "veeam-release-deb_1.0.9_amd64.deb" por si só não é o Agent, pois o comando **dpkg** pegou as informações desse arquivo e colocou no repositório para que o **apt**, um comando mais inteligente, consiga buscar na internet todo os pacotes do serviço e instalar na máquina. 
+Para instalar o Veeam Agent, é necessário usar o apt, um comando mais "inteligente" que consegue buscar na internet e instalar todos os pacotes do serviço e suas dependências.
 
--sudo apt-get upgrade #Atualizar os repositórios para as versões mais recentes
+sudo apt-get update
 
--sudo apt-get install veeam #Instalar o veeam para as configurações
-
-*CONFIGURANDO VEEAM AGENT PARA SE COMUNICAR COM O SERVIDOR VEEAM*
-
-
-
-
-
-
-
-
+sudo apt-get install veeam
