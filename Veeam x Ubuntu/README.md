@@ -78,9 +78,10 @@ Agora sim, o acesso a pasta compatilhada é permitido e pode ser feita a instala
 
 (foto)
 
-Após todas as configurações, é preciso baixar o Veeam, pois o arquivo "veeam-release-deb_1.0.9_amd64.deb #Desempacotar o arquivo" por si só não é o Agent, após mostra o caminho para o Linux onde buscar o serviço Veeam agent, pois o comando **dpkg** pegou as informações desse arquivo e colocou no repositório para que o **apt**, um comando mais inteligente, consiga buscar na internet todo os pacotes do serviço e instalar na máquina. 
+Após todas as configurações, é preciso baixar o Veeam, pois o arquivo "veeam-release-deb_1.0.9_amd64.deb" por si só não é o Agent, pois o comando **dpkg** pegou as informações desse arquivo e colocou no repositório para que o **apt**, um comando mais inteligente, consiga buscar na internet todo os pacotes do serviço e instalar na máquina. 
 
 -sudo apt-get upgrade #Atualizar os repositórios para as versões mais recentes
+
 -sudo apt-get install veeam #Instalar o veeam para as configurações
 
 *CONFIGURANDO VEEAM AGENT PARA SE COMUNICAR COM O SERVIDOR VEEAM*
