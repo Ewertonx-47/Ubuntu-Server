@@ -23,6 +23,34 @@ Entendendo todo o funcionamento das questões acima, é preciso montar o drive *
 -sudo mkdir -p /mnt/virtualbox #Criando uma pasta vazia dentro do diretório /mnt
 -sudo mount /dev/cdrom /mnt/virtualbox #Montando o drive cdrom em virtualbox 
 
+Uma observação sobre o /mnt, é que ele, por questões de padronização das distros, as montagens manuais e temporárias são feitas em cima dele.
+
+Depois de criar o arquivo e fazer a montagem, o pacote precisa de alguns outros pacotes de desenvolvimento que funcionarão junto com ele.
+
+sudo apt-get update && sudo apt-get install build-essential dkms
+
+Agora, depois de fazer a montagem e instalar os arquivos que irão auxiliar no funcionamento do pacote, é necessário entrar no arquivo onde o drive está montado e executar o instalador do Guest Addition.
+
+cd /mnt/virtualbox
+sudo ./VBoxLinuxAdditions.run
+
+(Foto)
+
+Na imagem, pode se observar que houve um erro na executação do instalador, pois ainda está em falta de alguns pacotes necessários para o funcionamento do Guest Addition. Nesse caso, será instalado mais pacotes necessários.
+
+-sudo apt-get update
+-sudo apt-get install gcc make perl
+
+Navegue até o ponto de montagem novamente e execute o instalador com **sudo ./VBoxLinuxAdditions.run**.
+
+(Foto)
+
+Conforma a imagem acima, execução do instalador funcionou normalmente. Agora, reiniciar a máquina é essencial para o bom funcionamento do pacote instalado. 
+
+
+
+
+
 
 
 
