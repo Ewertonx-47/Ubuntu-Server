@@ -44,6 +44,8 @@ sudo apt-get install gcc make perl
 
 Navegue até o ponto de montagem novamente e execute o instalador com sudo ./VBoxLinuxAdditions.run.
 
+![OK](../Imagem/instalador_ok.png)
+
 Conforme a imagem, a execução do instalador funcionou. Agora, é essencial reiniciar a máquina para que o pacote funcione corretamente.
 
 Configurando Permissões para a Pasta Compartilhada
