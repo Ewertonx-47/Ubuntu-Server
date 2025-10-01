@@ -49,7 +49,11 @@ Navegue até o ponto de montagem novamente e execute o instalador com sudo ./VBo
 Conforme a imagem, a execução do instalador funcionou. Agora, é essencial reiniciar a máquina para que o pacote funcione corretamente.
 
 Configurando Permissões para a Pasta Compartilhada
-Depois de reiniciar, o VirtualBox monta a pasta compartilhada no diretório /media. No entanto, para acessar o conteúdo, é necessário incluir o seu usuário (ewerton) em um grupo específico chamado vboxsf.
+Depois de reiniciar, o VirtualBox monta a pasta compartilhada no diretório /media. 
+
+![MEDIA](../Imagem/diretorio_media.png)
+
+No entanto, para acessar o conteúdo, é necessário incluir o seu usuário (ewerton) em um grupo específico chamado vboxsf.
 
 sudo usermod -aG vboxsf ewerton
 
