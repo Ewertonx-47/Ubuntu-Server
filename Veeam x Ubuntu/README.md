@@ -77,12 +77,12 @@ reboot
 
 Agora sim, o acesso à pasta compartilhada é permitido.
 
-![DOWNLOADS](../Imagem/sf_downloads.png)
-
 Instalando o Veeam Agent for Linux
 A partir da pasta compartilhada, use o dpkg para instalar o arquivo do repositório da Veeam.
 
 cd /media/sf_Downloads
+
+![DOWNLOADS](../Imagem/sf_downloads.png)
 
 sudo dpkg -i veeam-release-deb_1.0.9_amd64.deb
 
