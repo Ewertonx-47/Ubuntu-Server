@@ -14,7 +14,7 @@ Primeiro, é necessário criar uma pasta compartilhada entre o host e o Ubuntu. 
 
 clicar na VM > Configurações > Pasta compartilhada
 
-![PASTA](../Imagem/selecionar_pasta.png)
+![PASTA](../Assets/Utilitarios/selecionar_pasta.png)
 
 Depois de mapear a pasta, é preciso instalar um pacote de software que faz a ponte entre a VM e o host, para que a VM consiga enxergar a pasta compartilhada. Esse pacote é o Guest Additions. A ISO do Guest Additions já é inserida no drive virtual de DVD/CD da VM no momento da instalação do sistema operacional. O Linux enxerga todos os dispositivos como arquivos, e o drive onde está o Guest Additions é o arquivo /dev/cdrom.
 
@@ -36,7 +36,7 @@ cd /mnt/virtualbox
 
 sudo ./VBoxLinuxAdditions.run
 
-![ERRO](../Imagem/erro_instalador.png)
+![ERRO](../Assets/Erros/erro_instalador.png)
 
 Se a instalação der um erro de falta de pacotes, instale os que estão faltando.
 
@@ -44,18 +44,18 @@ sudo apt-get install gcc make perl
 
 Navegue até o ponto de montagem novamente e execute o instalador com sudo ./VBoxLinuxAdditions.run.
 
-![OK](../Imagem/instalador_ok.png)
+![OK](../Assets/Utilitarios/instalador_ok.png)
 
 Conforme a imagem, a execução do instalador funcionou. Agora, é essencial reiniciar a máquina para que o pacote funcione corretamente.
 
 Configurando Permissões para a Pasta Compartilhada
 Depois de reiniciar, o VirtualBox monta a pasta compartilhada no diretório /media. 
 
-![MEDIA](../Imagem/diretorio_media.png)
+![MEDIA](../Assets/Utilitarios/diretorio_media.png)
 
 Não foi possível acessar o contéudo da pasta compartilhada.
 
-![PERMISSAO](../Imagem/erro_permissao.png)
+![PERMISSAO](../Assets/Erros/erro_permissao.png)
 
 No entanto, para acessar o conteúdo, é necessário incluir o seu usuário (ewerton) em um grupo específico chamado vboxsf.
 
@@ -82,7 +82,7 @@ A partir da pasta compartilhada, use o dpkg para instalar o arquivo do repositó
 
 cd /media/sf_Downloads
 
-![DOWNLOADS](../Imagem/sf_downloads.png)
+![DOWNLOADS](../Assets/Utilitarios/sf_downloads.png)
 
 sudo dpkg -i veeam-release-deb_1.0.9_amd64.deb
 

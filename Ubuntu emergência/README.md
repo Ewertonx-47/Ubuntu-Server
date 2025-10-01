@@ -4,7 +4,7 @@ Ao iniciar o Ubuntu, foi identificado que o sistema foi aberto como usuário roo
 Porém, na hora de utilizar o Samba, que é o software utilizado para fazer a comunicação entre o Linux e o Windows, o Windows não conseguiu mapear o caminho que foi configurado anteriormente. 
 O primeiro problema identificado foi que o Ubuntu não estava na mesma rede que o host. A interface 1 (lo) é a de loopback, a interface 2 (enp0s3) é a que faz a comunicação interna com o pfsense e a interface 3 (enps0s8) estava vazia. Após usar o comando "sudo dhclient', a interface 3 passou a receber IP. 
 
-![ENP0S8](../Imagem/j_enp0s8.png)
+![ENP0S8](../Assets/Utilitarios/enp0s8.png)
 
 Mas mesmo a interface obtendo IP, o mapeamento continuou indisponível. O erro que foi mostrado era de “caminho já está sendo utilizado”. Normalmente quando isso acontece, é porque o sistema operacional já tem uma sessão ativa com o mesmo servidor .No Prompt de comando do Windows, foi utilizado alguns comandos para verificar o motivo do não funcionamento do serviço. 
 
@@ -28,13 +28,13 @@ Conforme a imagem abaixo, ao tentar executar o “systemctl start smbd” após 
 
 “Failed to start smbd.service: Transaction for smbd.service/start is destructive (emergency.target has 'start' job queued, but 'stop' is included in transaction).”
 
-![START](../Imagem/k_startsmbd.png)
+![START](../Assets/Utilitario/startsmbd.png)
 
 Nesse caso, ele quis dizer que o systemd do sistema operacional está em modo crítico. E isso já esclarece o porque o sistema inicializou como root e o serviço não está rodando. Foi executado um “systemctl status apache2” para verificar um outro serviço e também não estava rodando. 
 
 Também foi feita uma analise os logs do serviço para identificar se existia algum comportamento suspeito. 
 
-![LOG](../Imagem/logsmbd.png)
+![LOG](../Assets/Utilitarios/logsmbd.png)
 
 O que pode ser observado na imagem acima é que a última execução do serviço foi no dia 28 de Agosto. Também foi executado alguns comandos para verificar qual é o alvo de inicialização do sistema 
 
@@ -88,7 +88,7 @@ Como foi de entendimento que pode ser algo que está corrompendo o sistema, e po
 
 -journalctl -xb
 
-![LOG](../Imagem/journalctl-xb.png)
+![LOG](../Assets/Utilitarios/journalctl-xb.png)
 
 Como não houve nenhum problema de inicialização do sistema operacional, e a situação atual se trata de um possível disco corrompido. Foi analisado como estava os discos e partições utilizando um comando.
 
@@ -104,7 +104,7 @@ fsck from util-linux 2.37.2
 
 Normalmente essa ferramenta faz algumas perguntas [y|n], porém o comando simplesmente retornou para a linha de comando sem nenhuma mensagem adicional, isso pode indicar que o sistema de arquivos já estava limpo e não havia erros a serem corrigidos.
 
-![FSCK](../Imagem/fsck.png)
+![FSCK](../Assets/Utilitarios/fsck.png)
 
 O problema mais provável é a partição sda3 e a entrada incorreta no arquivo /etc/fstab.O que é preciso fazer agora é o que já foi discutido:
 
