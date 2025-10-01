@@ -53,6 +53,10 @@ Depois de reiniciar, o VirtualBox monta a pasta compartilhada no diretório /med
 
 ![MEDIA](../Imagem/diretorio_media.png)
 
+Não foi possível acessar o contéudo da pasta compartilhada.
+
+![PERMISSAO](../Imagem/erro_permissao.png)
+
 No entanto, para acessar o conteúdo, é necessário incluir o seu usuário (ewerton) em um grupo específico chamado vboxsf.
 
 sudo usermod -aG vboxsf ewerton
