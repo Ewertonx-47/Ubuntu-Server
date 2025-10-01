@@ -36,6 +36,8 @@ cd /mnt/virtualbox
 
 sudo ./VBoxLinuxAdditions.run
 
+![ERRO](../Imagem/erro_instalador.png)
+
 Se a instalação der um erro de falta de pacotes, instale os que estão faltando.
 
 sudo apt-get install gcc make perl
