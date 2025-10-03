@@ -55,7 +55,7 @@ Informe as credenciais da máquina
 
 E agora, acesso permitido ao backup feito. 
 
-![disk](../Assets/Backup veeam/backup_veeam_ok.png)
+![disk](../Assets/Backup_veeam/backup_veeam_ok.png)
 
 
 
