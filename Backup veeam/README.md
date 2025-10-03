@@ -43,15 +43,15 @@ Agora, é possível ir no veeam B&R e localizar o backup da máquina.
 
 home -> Backups -> disk
 
-![disk](../Assets/Backup veeam/restore_veeam.png)
+![disk](../Assets/Backup_veeam/restore_veeam.png)
 
 Restore guest files -> linux and other 
 
-![disk](../Assets/Backup veeam/restore_guest.png)
+![disk](../Assets/Backup_veeam/restore_guest.png)
 
 Informe as credenciais da máquina
 
-![disk](../Assets/Backup veeam/credenciais_veeam.png)
+![disk](../Assets/Backup_veeam/credenciais_veeam.png)
 
 E agora, acesso permitido ao backup feito. 
 
