@@ -1,63 +1,68 @@
 FAZENDO BACKUP DA PARTIÇÃO DO UBUNTU
 
-Com o veeam agent instalado no linux, é possível fazer os backups do sistema operacional conforme a necessidade do usuario. Pode ser feito o backup do SO por completo, de um diretório ou partição. No homelab em questão, será feito o backup da partição sd3 que contém um volume logico para o armazenamento dos arquivos utilizando o serviço samba para criar a comunicação com o host (Windows) e a vm (Linux) no virtualbox. Para começar iniciar todo esse processo, primeiro é criado um job de backup.
-Como anteriormente já havia sido criado um job, porém era referente a todo o sistema operacional, e esse não é o objetivo. Esse job será apagado e criado um novo.
+Com o Veeam Agent instalado no Linux, é possível realizar backups do sistema operacional conforme a necessidade do usuário. O backup pode abranger todo o sistema operacional, apenas um diretório ou uma partição específica.
+
+No homelab em questão, será executado o backup da partição sd3, que contém um volume lógico destinado ao armazenamento de arquivos. Para estabelecer a comunicação entre o host (Windows) e a máquina virtual (Linux) no VirtualBox, é utilizado o serviço Samba.
+
+Para iniciar esse processo, é necessário criar um job de backup.
+
+Como anteriormente já havia sido criado um job referente ao backup completo do sistema operacional, e esse não é o objetivo, o job existente será excluído e um novo será criado.
 
 -sudo veeamconfig job delete --id {id_do_job}
 
 ![jobdelete](../Assets/Utilitarios/job_delete.png)
 
--sudo veeam #Criar um novo job
+-sudo veeam   # Criar um novo job
 
 ![summary](../Assets/Backup veeam/summary_veeam.png)
 
-Com o comando "sudo veeam" é aberto uma interface onde dev ser inseridas as infomações do job que está sendo criado. Nesse homelab, o nome do backup será "jobe_test", o destino será o repositório padrão, que é o veeam B&R do windows e será feito o backup da partição sd3, como informado anteriormente. 
+Ao executar o comando sudo veeam, é aberta uma interface na qual devem ser inseridas as informações do job que está sendo criado. Neste homelab, o nome definido para o backup será job_teste, o destino será o repositório padrão (Veeam Backup & Replication do Windows) e o escopo do backup será a partição sd3, conforme informado anteriormente.
 
-com o job criado, iremos listar ele na linha de comando do Linux para ver algumas informações necessárias.
+Com o job criado, iremos listá-lo na linha de comando do Linux para obter algumas informações necessárias.
 
 - sudo veeamconfig job list
 
 ![joblist](../Assets/Utilitarios/job_list.png)
 
-Com o id informado pelo job list, pode ser usado para ver informações mais detalhadas sobre o job criado. 
+Com o ID informado pelo job list, é possível consultar informações mais detalhadas sobre o job criado.
 
 -sudo veeamconfig job info --id <ID_DO_JOB>
 
 ![jobinfo](../Assets/Utilitarios/sudo_veeam_info.png)
 
-Já foi identificado o id do job, suas informações principais como:
+As informações principais do job identificado são:
 
-O que vai ser feito o backup: Volume da partição sd3
-Hora do backup: 00:30
-Local do backup: Default Backup repository
+Volume configurado para backup: partição sd3
 
-Sendo assim, pode se inciar o backup da partição em questão, mesmo já tendo um horário configurado como padrão.
+Horário do backup: 00:30
 
--sudo veeamconfig job strat -name job_teste
+Local de destino: Default Backup Repository
+
+Com esses parâmetros confirmados, é possível iniciar o backup da partição em questão, mesmo que já exista um agendamento configurado.
+
+-sudo veeamconfig job start --name job_teste
 
 ![jobstart](../Assets/Utilitarios/job_start.png)
 
-Na imagem mostra que o backup foi executado com sucesso e foi gerado logs do backup. 
+Na execução, observa-se que o backup foi realizado com sucesso e que os logs foram devidamente gerados.
 
-Agora, é possível ir no veeam B&R e localizar o backup da máquina. 
+Em seguida, é possível acessar o Veeam Backup & Replication (Windows) e localizar o backup da máquina em:
 
 home -> Backups -> disk
 
 ![disk](../Assets/Backup_veeam/restore_veeam.png)
 
-Restore guest files -> linux and other 
+Para restaurar arquivos da máquina Linux:
+
+Restore guest files -> Linux and other
 
 ![disk](../Assets/Backup_veeam/restore_guest.png)
 
-Informe as credenciais da máquina
+Será solicitado o fornecimento das credenciais da máquina.
 
 ![disk](../Assets/Backup_veeam/credenciais_veeam.png)
 
-E agora, acesso permitido ao backup feito. 
+Uma vez informadas corretamente, o acesso ao backup é concedido.
 
 ![disk](../Assets/Backup_veeam/backup_veeam_ok.png)
-
-
-
-
 
