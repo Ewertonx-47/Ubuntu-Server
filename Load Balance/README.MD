@@ -161,6 +161,9 @@ Conectividade externa via NAT funcional.
 Sistema pronto para configuração do Nginx como Load Balancer nas próximas etapas.
 
 🗂️ Estrutura de Arquivos Netplan (Exemplo Final)
+
 /etc/netplan/
+
 ├── 01-enp0s8.yaml   # Rede interna - IP estático (192.168.100.52)
+
 └── 02-enp0s3.yaml   # Rede NAT - DHCP automático
