@@ -66,7 +66,7 @@ Falha 1 — Interface NAT sem IP
 Mesmo com o arquivo YAML configurado, a interface NAT (enp0s8) não recebia IP automaticamente.
 Foi necessário atribuir manualmente um IP com:
 
-sudo dhclient enp0s3
+sudo dhclient enp0s8
 
 O IP obtido foi 10.0.3.15.
 
