@@ -27,9 +27,9 @@ Redes configuradas no VirtualBox:
 
 Cada VM possui duas interfaces de rede:
 
-enp0s3 — Rede interna (192.168.100.0/24)
+— Rede interna (192.168.100.0/24)
 
-enp0s8 — Rede NAT (acesso externo)
+— Rede NAT (acesso externo)
 
 -Etapas de Configuração
 
