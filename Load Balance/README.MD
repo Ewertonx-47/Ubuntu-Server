@@ -85,9 +85,9 @@ Por isso, foi necessário inverter a ordem das interfaces (pois a interface com 
 
 interfaces invertidas no VirtualBox
 
-![ADP2](../Assets/virtualbox/adptador2_nat.png)
+![ADP2](../Assets/virtualbox/adaptador2_nat.png)
 
-![ADP1](../Assets/virtualbox/adptador1_nat.png)
+![ADP1](../Assets/virtualbox/adaptador1_nat.png)
 
 arquivo YAML corrigido
 
