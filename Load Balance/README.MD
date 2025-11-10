@@ -9,11 +9,11 @@ Além disso, haverá uma VM cliente responsável pelos testes de acesso e valida
 
 Máquinas Virtuais Utilizadas:
 
-Função	Sistema	IP	Descrição:
---Servidor Apache 1:	Ubuntu	192.168.100.50 - Site principal
---Servidor Apache 2:	Ubuntu	192.168.100.52 - Clone do site principal
---Balanceador:	Nginx	192.168.100.53 - Responsável pelo Load Balance
---Cliente:	Lubuntu	192.168.100.51 - Usado para validação de funcionamento
+Descrição:
+--Servidor Apache 1: Ubuntu 192.168.100.50 - Site principal
+--Servidor Apache 2: Ubuntu 192.168.100.52 - Clone do site principal
+--Balanceador: Nginx 192.168.100.53 - Responsável pelo Load Balance
+--Cliente: Lubuntu 192.168.100.51 - Usado para validação de funcionamento
 
 Redes configuradas no VirtualBox:
 
@@ -42,7 +42,7 @@ Também foram criadas mais duas VMs:
 
 Após isso, todas as VMs foram inicializadas no VirtualBox.
 
-(foto da topologia sugerida aqui)
+![VM](../Assets/virtualbox/vms_virtualbox.png)
 
  2. Configuração de Rede VM clone
 
@@ -51,15 +51,7 @@ Também foi adicionada uma interface NAT na VM clone para permitir acesso à int
 
 IPs definidos manualmente via Netplan:
 
-# Exemplo do arquivo /etc/netplan/01-network.yaml
-network:
-  version: 2
-  renderer: networkd
-  ethernets:
-    enp0s8:
-      dhcp4: no
-      addresses:
-        - 192.168.100.52/24
+![YAML](../Assets/yaml/file_yaml_clone.png)
 
 Problemas Encontrados
 
@@ -74,7 +66,7 @@ sudo dhclient enp0s3
 
 O IP obtido foi 10.0.3.15.
 
-(foto do comando e retorno)
+![DHCLIENT](../Assets/Utilitarios/dhclient_manual.png)
 
 Falha 2 — Sem acesso à internet
 
@@ -84,15 +76,22 @@ Testes de ping:
 
 ping 8.8.8.8
 
-(foto do teste de ping falho)
+![PING](../Assets/Utilitarios/ping_failed.png)
 
 Análises e Diagnóstico
 
 O VirtualBox normalmente atribui o NAT à primeira interface de rede.
 Por isso, foi necessário inverter a ordem das interfaces (pois a interface com NAT era o adaptador 2 e a interface de rede interna era o adptador 1), nas configurações da VM e ajustar o arquivo YAML correspondente.
 
-(foto das interfaces invertidas no VirtualBox)
-(foto do novo arquivo YAML)
+interfaces invertidas no VirtualBox
+
+![ADP2](../Assets/virtualbox/adptador2_nat.png)
+
+![ADP1](../Assets/virtualbox/adptador1_nat.png)
+
+arquivo YAML corrigido
+
+![INVERSAO](../Assets/yaml/inversao_arquivo_yaml.png)
 
 Mesmo após o ajuste, ao verificar com:
 
@@ -102,7 +101,7 @@ O systemd-networkd ainda aplicava apenas a configuração da primeira interface 
 
 Verificação:
 
-(foto mostrando apenas enp0s3 configurada)
+![CAT](../Assets/yaml/cat_etc-netplan-yaml.png)
 
 Causa Raiz
 
@@ -119,7 +118,7 @@ Solução Aplicada
 A solução foi remover o gateway manual e deixar o DHCP fornecer automaticamente o IP e gateway padrão.
 Após isso, as configurações foram aplicadas corretamente.
 
-(foto do arquivo corrigido sem gateway manual)
+![AJUSTE](../Assets/yaml/ajuste_gateway.png)
 
 Erro ao aplicar Netplan
 
@@ -129,7 +128,7 @@ sudo netplan apply
 
 Foi exibido o erro:
 
-Error in network definition: line 9 column 6
+![WARNING](../Assets/Utilitarios/warning.png)
 
 Isso ocorreu porque as duas interfaces estavam sendo declaradas no mesmo arquivo YAML, gerando conflito de identação.
 
@@ -143,13 +142,17 @@ Foram criados dois arquivos separados:
 
 Após dividir os arquivos, as configurações foram aplicadas com sucesso e o acesso à internet foi restaurado.
 
-(foto dos dois arquivos e saída do netplan apply com sucesso)
+![APLICACAO](../Assets/yaml/aplication_yaml_available.png)
 
-🧾 Resultado Final
+Resultado Final
 
 Conectividade interna entre as VMs funcionando.
 
+![COMUNICACAO](../Assets/Utilitarios/vms_comunication.png)
+
 Conectividade externa via NAT funcional.
+
+![INTERNET](../Assets/Utilitarios/saida_internet_available.png)
 
 Sistema pronto para configuração do Nginx como Load Balancer nas próximas etapas.
 
