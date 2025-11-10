@@ -10,6 +10,7 @@ Além disso, haverá uma VM cliente responsável pelos testes de acesso e valida
 Máquinas Virtuais Utilizadas:
 
 Descrição:
+
 --Servidor Apache 1: Ubuntu 192.168.100.50 - Site principal
 
 --Servidor Apache 2: Ubuntu 192.168.100.52 - Clone do site principal
