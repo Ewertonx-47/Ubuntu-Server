@@ -11,8 +11,11 @@ Máquinas Virtuais Utilizadas:
 
 Descrição:
 --Servidor Apache 1: Ubuntu 192.168.100.50 - Site principal
+
 --Servidor Apache 2: Ubuntu 192.168.100.52 - Clone do site principal
+
 --Balanceador: Nginx 192.168.100.53 - Responsável pelo Load Balance
+
 --Cliente: Lubuntu 192.168.100.51 - Usado para validação de funcionamento
 
 Redes configuradas no VirtualBox:
